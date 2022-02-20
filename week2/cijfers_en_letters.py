@@ -10,7 +10,7 @@ def remove(string):
 
 
 Bewerking = remove(Bewerking)
-for i,letter in enumerate(Bewerking,1):
+for letter in Bewerking:
     if letter == "-":
         multiplier = -1
     elif letter == "+":
