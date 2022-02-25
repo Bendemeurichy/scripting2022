@@ -14,12 +14,12 @@ def ducci(lijst):
     fullducci = []
     fullducci.append(tuple(lijst))
 
-    if all([v == 0 for v in lijst]):
+    if all(v == 0 for v in lijst):
         return tuple(fullducci)
 
     tempducci = volgende(tuple(lijst))
 
-    while tempducci not in fullducci and not all([v == 0 for v in tempducci]):
+    while tempducci not in fullducci and not all(v == 0 for v in tempducci):
         fullducci.append(tuple(tempducci))
         tempducci = volgende(tempducci)
 
@@ -31,7 +31,7 @@ def periode(lijst):
     duccilijst = list(ducci(lijst))
     lastEl = duccilijst[-1]
 
-    if not all([v == 0 for v in lastEl]):
+    if not all(v == 0 for v in lastEl):
         index = duccilijst.index(lastEl)
         return len(duccilijst) - index - 1
 
