@@ -4,7 +4,9 @@ def volgende(lijst):
     nextducci = []
 
     for i, element in enumerate(lijst):
-        bereken = lambda el1, el2: el2 - el1 if el2 > el1 else el1 - el2
+        def bereken(el1, el2):
+            return el2 - el1 if el2 > el1 else el1 - el2
+
         nextducci.append(bereken(element, lijst[(i + 1) % len(lijst)]))
 
     return tuple(nextducci)
