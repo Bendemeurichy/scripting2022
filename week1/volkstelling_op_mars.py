@@ -4,10 +4,7 @@ import math
 
 # source: https://www.pythonpool.com/check-if-number-is-prime-in-python/
 def isprime(num):
-    for k in range(2, int(num ** 1 / 2) + 1):
-        if num % k == 0:
-            return False
-    return True
+    return all(num % k != 0 for k in range(2, int(num ** 1 / 2) + 1))
 
 
 n = int(input())
