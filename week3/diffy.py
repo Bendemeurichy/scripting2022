@@ -29,7 +29,7 @@ def ducci(lijst):
 
 def periode(lijst):
     duccilijst = list(ducci(lijst))
-    lastEl = duccilijst[len(duccilijst) - 1]
+    lastEl = duccilijst[-1]
 
     if not all([v == 0 for v in lastEl]):
         index = duccilijst.index(lastEl)
