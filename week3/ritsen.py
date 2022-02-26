@@ -30,6 +30,7 @@ def ritsen(tuple1, tuple2):
     tot = samenvoegen(tuple1, tuple2)
 
     for i in range(kortste(tuple1, tuple2), langste(tuple1, tuple2)):
-        tot.append(tuple1[i]) if len(tuple1) > len(tuple2) else tot.append(tuple2[i])
+        tot.append(tuple1[i]) if len(tuple1) > len(
+            tuple2) else tot.append(tuple2[i])
 
     return tot

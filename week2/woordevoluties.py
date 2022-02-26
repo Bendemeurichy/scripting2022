@@ -9,7 +9,8 @@ if verschil < 0:
 
 for element in woord:
     nieuweLetter = Alphabet[(Alphabet.index(element) + verschil) % 26]
-    interval = (Alphabet[Alphabet.index(element) + 1:(Alphabet.index(element) + verschil)])
+    interval = (Alphabet[Alphabet.index(element) +
+                1:(Alphabet.index(element) + verschil)])
 
     if (Alphabet.index(element) + verschil) > 26:
         interval += Alphabet[0:(Alphabet.index(element) + verschil) % 26]
