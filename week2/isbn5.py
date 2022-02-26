@@ -18,10 +18,10 @@ def isISBN(code):
     # van het gegevenstype dat als tweede argument wordt doorgegeven
     # aan de functie
     return (
-            isinstance(code, str) and  # code moet string zijn
-            len(code) == 10 and  # code moet bestaan uit 10 karakters
-            code[:9].isdigit() and  # eerste 9 karakters moeten cijfers zijn
-            controlecijfer(code) == code[-1]  # controlecijfer moet correct zijn
+        isinstance(code, str) and  # code moet string zijn
+        len(code) == 10 and  # code moet bestaan uit 10 karakters
+        code[:9].isdigit() and  # eerste 9 karakters moeten cijfers zijn
+        controlecijfer(code) == code[-1]  # controlecijfer moet correct zijn
     )
 
 

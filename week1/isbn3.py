@@ -11,6 +11,7 @@ while eerste_cijfer != 'stop':
 
     gegeven_controlecijfer = int(input())
 
-    print('OK' if gegeven_controlecijfer == berekend_controlecijfer else 'FOUT')
+    print('OK' if gegeven_controlecijfer ==
+          berekend_controlecijfer else 'FOUT')
 
     eerste_cijfer = input()
