@@ -6,7 +6,7 @@ def rooster(grootte, seq):
     if len(seq) == grootte ** 2:
         res = []
         i = 0
-        for c in range(grootte):
+        for _ in range(grootte):
             res.append(seq[i:i + len(seq) // grootte])
             i += len(seq) // grootte
         return [list(el) for el in res]
