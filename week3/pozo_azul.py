@@ -5,7 +5,8 @@ aansluitend = {"N": "Z", "Z": "N", "O": "W", "W": "O"}
 
 
 def dwarsdoorsnede(grootte, veld):
-    assert (len(veld) // 2) % grootte == 0, "ongeldige dwarsdoorsnede"
+    if (len(veld) // 2) % grootte != 0:
+        raise AssertionError("ongeldige dwarsdoorsnede")
     coordinaten = [(veld[i:i + 2]) for i in range(0, len(veld), 2)]
     return [(coordinaten[i:i + (len(coordinaten) // grootte)]) for i in
             range(0, len(coordinaten), len(coordinaten) // grootte)]
@@ -25,7 +26,7 @@ def npos(hpos, doorsnede):
     mog = (doorsnede[hpos[0]][hpos[1]]).replace(hpos[2], '')
     vervolg1 = hpos[0] + (richtingen.get(mog))[0]
     vervolg2 = hpos[1] + (richtingen.get(mog))[1]
-    
+
     if vervolg1 in range(0, len(doorsnede)) \
             and vervolg2 in range(0, len(doorsnede[0])) \
             and aansluitend.get(mog) in doorsnede[vervolg1][vervolg2]:
