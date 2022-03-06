@@ -5,7 +5,8 @@ aansluitend = {"N": "Z", "Z": "N", "O": "W", "W": "O"}
 
 
 def dwarsdoorsnede(grootte, veld):
-    assert (len(veld) // 2) % grootte == 0, "ongeldige dwarsdoorsnede"
+    if (len(veld) // 2) % grootte != 0:
+        raise AssertionError("ongeldige dwarsdoorsnede")
     coordinaten = [(veld[i:i + 2]) for i in range(0, len(veld), 2)]
     return [(coordinaten[i:i + (len(coordinaten) // grootte)]) for i in
             range(0, len(coordinaten), len(coordinaten) // grootte)]

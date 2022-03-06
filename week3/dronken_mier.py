@@ -3,7 +3,8 @@ pijltjes = [">", "v", "<", "^"]
 
 
 def rooster(grootte, seq):
-    assert grootte ** 2 == len(seq), "ongeldige argumenten"
+    if grootte ** 2 != len(seq):
+        raise AssertionError("ongeldige argumenten")
     res = []
     i = 0
     for _ in range(grootte):
