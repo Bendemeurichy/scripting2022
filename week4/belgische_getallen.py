@@ -13,5 +13,5 @@ def getallenrij(n, k=0, aantal=None):
     return res[0:aantal]
 
 
-def isbelgisch(n,k=0):
-    return n in getallenrij(n,k)
+def isbelgisch(n, k=0):
+    return n in getallenrij(n, k)
