@@ -19,7 +19,8 @@ def print_tabel(tabel):
     letters = studentenletters(len(tabel))
     print("  " + " ".join(letters))
     for i, _ in enumerate(tabel):
-        print(f"{letters[i]} {' '.join(['-' if el is None else str(int(el)) for el in tabel[i]])}")
+        print(
+            f"{letters[i]} {' '.join(['-' if el is None else str(int(el)) for el in tabel[i]])}")
 
 
 def spreekt_met(persoon, tabel):
