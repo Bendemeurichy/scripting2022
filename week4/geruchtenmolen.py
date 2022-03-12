@@ -52,9 +52,11 @@ def is_ketting(mogketting, tabel):
 
 
 def kettingen(student1, student2, tabel):
-    overige = [el for el in studentenletters(len(tabel)) if el not in (student1, student2)]
+    overige = [el for el in studentenletters(
+        len(tabel)) if el not in (student1, student2)]
 
-    gewilde = [student1 + "".join(el) + student2 for el in itertools.permutations(overige)]
+    gewilde = [
+        student1 + "".join(el) + student2 for el in itertools.permutations(overige)]
     return {el for el in gewilde if is_ketting(el, tabel)}
 
 
