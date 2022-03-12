@@ -5,7 +5,7 @@ def getallenrij(n, k=0, aantal=None):
     w = 0
     res = [k]
     if aantal is None:
-        aantal = n + 1
+        aantal = n
     while k < n:
         k += int(spl[w])
         res.append(k)
@@ -13,17 +13,5 @@ def getallenrij(n, k=0, aantal=None):
     return res[0:aantal]
 
 
-def isbelgisch(n, k=0):
-    return n in getallenrij(n, k)
-
-
-def beginwaarden(n):
-    return [el for el in range(0, n + 1) if isbelgisch(n, el)]
-
-
-def isvlaams(n):
-    return isbelgisch(n, int(str(n)[0]))
-
-
-def iswestvlaams(n):
-    return isvlaams(n) and str(n) in "".join(map(str, getallenrij(n, int(str(n)[0]))))[0:len(str(n))]
+def isbelgisch(n,k=0):
+    return n in getallenrij(n,k)
