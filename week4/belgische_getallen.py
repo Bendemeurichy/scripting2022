@@ -5,7 +5,7 @@ def getallenrij(n, k=0, aantal=None):
     w = 0
     res = [k]
     if aantal is None:
-        aantal = n
+        aantal = n + 1
     while k < n:
         k += int(spl[w])
         res.append(k)
