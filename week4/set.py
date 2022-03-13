@@ -7,7 +7,7 @@ eigenschap = {"aantal": ("een", "twee", "drie"), "vulling": ("leeg", "halfvol", 
 
 
 def willekeurige_kaart():
-    return tuple([eigenschap.get(el)[random.randint(0, 2)] for el in eigenschap.keys()])
+    return tuple([eigenschap.get(el)[random.randint(0, 2)] for el in eigenschap])
 
 
 def willekeurige_kaarten(n):
