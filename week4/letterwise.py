@@ -1,7 +1,8 @@
 # https://dodona.ugent.be/nl/courses/1151/series/12989/activities/1301698881
 import re
 
-keyboard = [" ", "_,@", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"]
+keyboard = [" ", "_,@", "ABC", "DEF", "GHI",
+            "JKL", "MNO", "PQRS", "TUV", "WXYZ"]
 
 
 def lees_databank(db):
