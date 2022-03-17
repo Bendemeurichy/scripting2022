@@ -1,5 +1,4 @@
 # https://dodona.ugent.be/nl/courses/1151/series/12989/activities/312941025
-
 import itertools
 
 
@@ -20,15 +19,8 @@ def print_tabel(tabel):
     letters = studentenletters(len(tabel))
     print("  " + " ".join(letters))
     for i, _ in enumerate(tabel):
-        for j in range(len(tabel[i])):
-            if tabel[i][j]:
-                tabel[i][j] = "1"
-            elif tabel[i][j] is False:
-                tabel[i][j] = "0"
-            else:
-                tabel[i][j] = "-"
-
-        print(f"{letters[i]} {' '.join(tabel[i])}")
+        print(
+            f"{letters[i]} {' '.join(['-' if el is None else str(int(el)) for el in tabel[i]])}")
 
 
 def spreekt_met(persoon, tabel):
@@ -52,13 +44,13 @@ def is_ketting(mogketting, tabel):
 
 
 def kettingen(student1, student2, tabel):
-    overige = [el for el in studentenletters(
-        len(tabel)) if el not in (student1, student2)]
-
-    gewilde = [
-        student1 + "".join(el) + student2 for el in itertools.permutations(overige)]
-    return {el for el in gewilde if is_ketting(el, tabel)}
+    return {el for el in [student1 + "".join(el) + student2 for el in
+                          itertools.permutations([el for el in studentenletters(len(tabel)) if el not in
+                                                  (student1, student2)])] if is_ketting(el, tabel)}
 
 
+
+
+# returns list of the letters of the students
 def studentenletters(aantal):
     return list(map(chr, range(65, 65 + aantal)))
