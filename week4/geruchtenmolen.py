@@ -44,10 +44,10 @@ def is_ketting(mogketting, tabel):
 
 
 def kettingen(student1, student2, tabel):
-
     return {el for el in [student1 + "".join(el) + student2 for el in
                           itertools.permutations([el for el in studentenletters(len(tabel)) if el not in
                                                   (student1, student2)])] if is_ketting(el, tabel)}
+
 
 
 
