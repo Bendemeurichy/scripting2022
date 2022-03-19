@@ -49,6 +49,8 @@ def kettingen(student1, student2, tabel):
                                                   (student1, student2)])] if is_ketting(el, tabel)}
 
 
+
+
 # returns list of the letters of the students
 def studentenletters(aantal):
     return list(map(chr, range(65, 65 + aantal)))
