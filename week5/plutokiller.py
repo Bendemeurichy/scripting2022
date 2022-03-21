@@ -6,7 +6,8 @@ def coordinaten(loc):
     with open(loc, encoding='UTF-8') as sterren:
         i = 0
         for line in sterren:
-            res.extend([(i, el) for el in [ind for ind, el in enumerate(line) if el == "*"]])
+            res.extend(
+                [(i, el) for el in [ind for ind, el in enumerate(line) if el == "*"]])
             i += 1
     return set(res)
 

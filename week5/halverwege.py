@@ -27,7 +27,7 @@ def middelletter(letter1, letter2, asymmetrisch=False):
     if asymmetrisch:
         if alphabet.index(letter1) > alphabet.index(letter2):
             return alphabet[alphabet.index(letter1) + (
-                    alphabet.index(letter2, alphabet.index(letter1)) - alphabet.index(letter1)) // 2]
+                alphabet.index(letter2, alphabet.index(letter1)) - alphabet.index(letter1)) // 2]
     return alphabet[alphabet.index(letter1) - (alphabet.index(letter1) - alphabet.index(letter2)) // 2]
 
 
