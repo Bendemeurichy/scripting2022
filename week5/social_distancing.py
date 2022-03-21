@@ -22,6 +22,6 @@ def isconsistent(file1, file2):
         for line1, line2 in zip(f1, f2):
             if len(line1) != len(line2):
                 return False
-            if not [line1[el] == line2[el] for el in range(len(line1)) if line1[el] != " " and line2[el] != " "]:
+            if not [line1[el] == line2[el] for el in range(len(line1)) if " " not in (line1[el], line2[el])]:
                 return False
         return True
