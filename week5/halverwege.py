@@ -24,10 +24,12 @@ def middelletter(letter1, letter2, asymmetrisch=False):
     if (alphabet.index(letter1) - alphabet.index(letter2)) % 2 == 1:
         raise AssertionError("geen middelpunt")
 
-    if asymmetrisch:
-        if alphabet.index(letter1) > alphabet.index(letter2):
-            return alphabet[alphabet.index(letter1) + (
-                alphabet.index(letter2, alphabet.index(letter1)) - alphabet.index(letter1)) // 2]
+    if (
+        asymmetrisch
+        and alphabet.index(letter1) > alphabet.index(letter2)
+    ):
+        return alphabet[alphabet.index(letter1) + (
+            alphabet.index(letter2, alphabet.index(letter1)) - alphabet.index(letter1)) // 2]
     return alphabet[alphabet.index(letter1) - (alphabet.index(letter1) - alphabet.index(letter2)) // 2]
 
 
