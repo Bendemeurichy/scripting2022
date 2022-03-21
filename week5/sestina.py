@@ -47,10 +47,7 @@ def permutatie(lijst, volgorde=None):
 def sestina(loc, volgorde=None):
     gedicht = stanzas(loc)
     if len(gedicht) == len(gedicht[0]):
-        for i in range(0, len(gedicht) - 1):
-            if permutatie(gedicht[i], volgorde) != gedicht[i + 1]:
-                return False
-        return True
+        return all(permutatie(gedicht[i], volgorde) == gedicht[i + 1] for i in range(0, len(gedicht) - 1))
     elif len(gedicht) == len(gedicht[0]) + 1:
         for i in range(0, len(gedicht) - 2):
             if permutatie(gedicht[i], volgorde) != gedicht[i + 1]:
