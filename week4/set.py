@@ -30,4 +30,4 @@ def isset(*kaarten):
 
 def sets(kaarten):
     return len([el for el in itertools.permutations(kaarten, 3) if isset(*el)])//6
-    # //6 door sets die meerdere kereen voorkomen in verschillende volgorde, dus 3! aan dubbele
+    # //6 door sets die meerdere kereen voorkomen in verschillende volgorde, dus 3! letters dubbele

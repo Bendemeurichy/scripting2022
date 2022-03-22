@@ -16,7 +16,7 @@ def isISBN(code):
     # opmerking: isinstance is een ingebouwde functie die een Booleaanse waarde
     # teruggeeft die aangeeft of het eerste argument een object is
     # van het gegevenstype dat als tweede argument wordt doorgegeven
-    # aan de functie
+    # letters de functie
     return (
         isinstance(code, str) and  # code moet string zijn
         len(code) == 10 and  # code moet bestaan uit 10 karakters
