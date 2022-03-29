@@ -32,7 +32,8 @@ def parsons(loc):
 
 def contour(code, loc=None):
     res = []
-    lengte = ((abs(maximale_afwijking(code)[0]) + maximale_afwijking(code)[1]) * 2) + 1
+    lengte = (
+        (abs(maximale_afwijking(code)[0]) + maximale_afwijking(code)[1]) * 2) + 1
     for _ in range(0, lengte):
         res.append("")
     choogte = maximale_afwijking(code)[1] * 2

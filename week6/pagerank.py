@@ -10,7 +10,8 @@ class Netwerk:
     def __init__(self, loc, demping=0.85):
         with open(loc) as netwerk:
             for line in netwerk:
-                self.verbindingen[re.sub("[^A-Z]", "", line)[0]] = re.sub("[^A-Z]", "", line)[1:]
+                self.verbindingen[re.sub(
+                    "[^A-Z]", "", line)[0]] = re.sub("[^A-Z]", "", line)[1:]
 
         with open(loc) as netwerk:
             stdscorde = 1 / len(netwerk.readlines())
