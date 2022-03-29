@@ -8,7 +8,8 @@ class Mangarevaans:
 
     def __init__(self, number):
         if type(number) == int:
-            assert (1 <= number <= 799), "ongeldige waarde"
+            if not (1 <= number <= 799):
+                raise AssertionError("ongeldige waarde")
             self.value = number
         elif type(number) == str and re.match("^[0-9]?V?T?P?K?[0-9]?$", number) is not None:
             letterv = 0
