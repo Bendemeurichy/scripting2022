@@ -6,7 +6,7 @@ class Rooster:
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
                          't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
         self.sleutel = []
-        self.rooster = [[], [], []]
+        self.veld = [[], [], []]
         for el in s.lower():
             if el not in self.sleutel:
                 self.sleutel.append(el)
@@ -17,23 +17,23 @@ class Rooster:
             self.sleutel.extend(self.alphabet)
         else:
             self.sleutel.extend(self.alphabet)
-        self.rooster[0] = self.sleutel[0:9]
-        self.rooster[1] = self.sleutel[9:18]
-        self.rooster[2] = self.sleutel[18:27]
+        self.veld[0] = self.sleutel[0:9]
+        self.veld[1] = self.sleutel[9:18]
+        self.veld[2] = self.sleutel[18:27]
 
     def __str__(self):
         res = ""
-        for el in self.rooster:
+        for el in self.veld:
             res += f"{''.join(el).upper()}\n"
         return res.strip()
 
     def positie(self, c):
-        for el in self.rooster:
+        for el in self.veld:
             if c.lower() in el:
-                return self.rooster.index(el), el.index(c.lower())
+                return self.veld.index(el), el.index(c.lower())
 
     def karakter(self, r, c):
-        return self.rooster[r][c].upper()
+        return self.veld[r][c].upper()
 
 
 class Digrafid:
