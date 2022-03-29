@@ -20,8 +20,10 @@ class ISBN13:
     def __init__(self, code, lengte=1):
         # controleer geldigheid van argumenten
         boodschap = 'ongeldige ISBN code'
-        assert isinstance(code, int), boodschap
-        assert isinstance(lengte, int) and 1 <= lengte <= 5, boodschap
+        if not isinstance(code, int):
+            raise AssertionError(boodschap)
+        if not (isinstance(lengte, int) and 1 <= lengte <= 5):
+            raise AssertionError(boodschap)
         # objecteigenschappen: ISBN-code en lengte van landaanduiding
         # omzetten naar string van 13 karakters met voorloopnullen
         self.code = str(code).zfill(13)
@@ -43,7 +45,8 @@ class ISBN13:
     def isgeldig(self):
         def controlecijfer(code):
             # ISBN-13 controlecijfer berekenen
-            controle = sum((3 if i % 2 else 1) * int(code[i]) for i in range(12))
+            controle = sum((3 if i % 2 else 1) *
+                           int(code[i]) for i in range(12))
             # controlecijfer omzetten naar stringvoorstelling
             return str((10 - controle) % 10)
             # nagaan of controlecijfer geldig is
