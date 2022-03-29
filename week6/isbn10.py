@@ -45,7 +45,8 @@ class ISBN13:
     def isgeldig(self):
         def controlecijfer(code):
             # ISBN-13 controlecijfer berekenen
-            controle = sum((3 if i % 2 else 1) * int(code[i]) for i in range(12))
+            controle = sum((3 if i % 2 else 1) *
+                           int(code[i]) for i in range(12))
             # controlecijfer omzetten naar stringvoorstelling
             return str((10 - controle) % 10)
             # nagaan of controlecijfer geldig is
