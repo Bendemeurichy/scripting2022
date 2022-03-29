@@ -43,7 +43,8 @@ class Digrafid:
 
     def triplet(self, digraaf):
         return self.rooster1.positie(digraaf[0])[1], 3 * self.rooster1.positie(digraaf[0])[0] + \
-               self.rooster2.positie(digraaf[1])[0], self.rooster2.positie(digraaf[1])[1]
+            self.rooster2.positie(digraaf[1])[
+            0], self.rooster2.positie(digraaf[1])[1]
 
     def digraaf(self, g1, g2, g3):
         return f"{self.rooster1.karakter(g2 // 3, g1)}{self.rooster2.karakter(g2 % 3, g3)}"
