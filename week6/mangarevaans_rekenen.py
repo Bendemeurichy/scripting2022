@@ -14,7 +14,8 @@ class Mangarevaans:
             letterv = 0
             a80 = int(number[0]) if (number[0]).isdigit() else 1
             for el in re.sub("[0-9]", "", number):
-                letterv += self.symbols[el] * a80 if el == "V" else self.symbols[el]
+                letterv += self.symbols[el] * \
+                    a80 if el == "V" else self.symbols[el]
 
             eenheden = int(number[-1]) if number[-1].isdigit() else 0
             self.value = letterv + eenheden
