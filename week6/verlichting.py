@@ -7,8 +7,10 @@ class Display:
              'E': ['|', 3, [0]], 'F': ['|', 1, [0]], 'G': ['-', 2, [1, 2]]}
 
     def __init__(self, getal):
+
         if not all(el in self.licht and getal.count(el) == 1 for el in getal):
             raise AssertionError("ongeldige segmenten")
+
         self.letters = getal
 
     def __repr__(self):

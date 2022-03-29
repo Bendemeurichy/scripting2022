@@ -76,8 +76,10 @@ class Shikaku:
         self.rechthoeken.append(rechthoek)
 
     def verwijderen(self, pos):
+
         if not (any(pos not in self.cellen(el) for el in self.rechthoeken) and pos in self.nummervelden):
             raise AssertionError('ongeldige positie')
+
         for el in self.rechthoeken:
             if pos in self.cellen(el):
                 self.rechthoeken.remove(el)
