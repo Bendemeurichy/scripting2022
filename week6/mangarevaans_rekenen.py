@@ -7,11 +7,11 @@ class Mangarevaans:
     value = 0
 
     def __init__(self, number):
-        if type(number) == int:
+        if type(number) is int:
             if not (1 <= number <= 799):
                 raise AssertionError("ongeldige waarde")
             self.value = number
-        elif type(number) == str and re.match("^[0-9]?V?T?P?K?[0-9]?$", number) is not None:
+        elif type(number) is str and re.match("^[0-9]?V?T?P?K?[0-9]?$", number) is not None:
             letterv = 0
             a80 = int(number[0]) if (number[0]).isdigit() else 1
             for el in re.sub("[0-9]", "", number):
