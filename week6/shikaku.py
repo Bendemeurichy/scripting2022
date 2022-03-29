@@ -69,14 +69,17 @@ class Shikaku:
         return set(res)
 
     def bedekken(self, rechthoek):
-        assert (all(el[0] <= self.rijen and el[1] <= self.kolommen for el in rechthoek.cellen()) and
+        if not (all(el[0] <= self.rijen and el[1] <= self.kolommen for el in rechthoek.cellen()) and
                 all(rechthoek & el is None for el in self.rechthoeken) and len(self.cellen(rechthoek)) == 1 and
-                rechthoek.oppervlakte() == self.getallen(rechthoek)[0]), "ongeldige rechthoek"
+                rechthoek.oppervlakte() == self.getallen(rechthoek)[0]):
+            raise AssertionError("ongeldige rechthoek")
         self.rechthoeken.append(rechthoek)
 
     def verwijderen(self, pos):
-        assert (any(pos not in self.cellen(el) for el in self.rechthoeken)
-                and pos in self.nummervelden), 'ongeldige positie'
+
+        if not (any(pos not in self.cellen(el) for el in self.rechthoeken) and pos in self.nummervelden):
+            raise AssertionError('ongeldige positie')
+
         for el in self.rechthoeken:
             if pos in self.cellen(el):
                 self.rechthoeken.remove(el)
