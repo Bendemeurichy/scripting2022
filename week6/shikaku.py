@@ -77,7 +77,6 @@ class Shikaku:
 
     def verwijderen(self, pos):
 
-
         if not (any(pos not in self.cellen(el) for el in self.rechthoeken) and pos in self.nummervelden):
             raise AssertionError('ongeldige positie')
 
