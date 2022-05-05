@@ -1,41 +1,40 @@
 // https://dodona.ugent.be/nl/courses/1151/series/12994/activities/202010242
 // https://dodona.ugent.be/nl/courses/1151/series/12994/activities/202010242
-const assert=require("assert");
-
 class Zeshoek{
 
     constructor(q,r) {
-        this.q=q;
-        this.r=r;
+        this._q = q;
+        this._r = r;
+        Object.freeze;
     };
 
     toString(){
-        return `Zeshoek(${this.q}, ${this.r})`;
+        return `Zeshoek(${this._q}, ${this._r})`;
     }
 
     afstand(zeshoek){
-        return (1/2)*(Math.abs(this.q-zeshoek.q)+Math.abs(this.r-zeshoek.r)+Math.abs(this.q+this.r-zeshoek.q-zeshoek.r));
+        return (1/2)*(Math.abs(this._q-zeshoek._q)+Math.abs(this._r-zeshoek._r)+Math.abs(this._q+this._r-zeshoek._q-zeshoek._r));
     }
 
     buur(richting){
         switch (richting){
             case "NW":
-                return new Zeshoek(this.q,this.r-1);
+                return new Zeshoek(this._q,this._r-1);
                 break;
             case "NO":
-                return new Zeshoek(this.q+1,this.r-1);
+                return new Zeshoek(this._q+1,this._r-1);
                 break;
             case "O":
-                return new Zeshoek(this.q+1,this.r);
+                return new Zeshoek(this._q+1,this._r);
                 break;
             case "ZO":
-                return new Zeshoek(this.q,this.r+1);
+                return new Zeshoek(this._q,this._r+1);
                 break;
             case "ZW":
-                return new Zeshoek(this.q-1,this.r+1);
+                return new Zeshoek(this._q-1,this._r+1);
                 break;
             case "W":
-                return new Zeshoek(this.q-1,this.r);
+                return new Zeshoek(this._q-1,this._r);
                 break;
             default:
                 throw {name:"AssertionError",message:"ongeldige richting"};
