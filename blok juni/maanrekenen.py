@@ -19,13 +19,18 @@ class Maan:
     def __add__(self, other):
         temp = ""
         if isinstance(other, Maan):
-            smallest: int = self.val if len(str(self.val)) < len(str(other.val)) else other.val
-            largest: int = self.val if len(str(self.val)) >= len(str(other.val)) else other.val
+            smallest: int = self.val if len(str(self.val)) < len(
+                str(other.val)) else other.val
+            largest: int = self.val if len(str(self.val)) >= len(
+                str(other.val)) else other.val
         else:
-            smallest: int = self.val if len(str(self.val)) < len(str(other)) else other
-            largest: int = self.val if len(str(self.val)) >= len(str(other)) else other
+            smallest: int = self.val if len(
+                str(self.val)) < len(str(other)) else other
+            largest: int = self.val if len(
+                str(self.val)) >= len(str(other)) else other
         for _ in range(0, len(str(largest))):
-            temp += str(smallest % 10) if smallest % 10 > largest % 10 else str(largest % 10)
+            temp += str(smallest %
+                        10) if smallest % 10 > largest % 10 else str(largest % 10)
             smallest //= 10
             largest //= 10
 
@@ -38,11 +43,15 @@ class Maan:
         mult = []
 
         if isinstance(other, Maan):
-            smallest: int = self.val if len(str(self.val)) < len(str(other.val)) else other.val
-            largest: int = self.val if len(str(self.val)) >= len(str(other.val)) else other.val
+            smallest: int = self.val if len(str(self.val)) < len(
+                str(other.val)) else other.val
+            largest: int = self.val if len(str(self.val)) >= len(
+                str(other.val)) else other.val
         else:
-            smallest: int = self.val if len(str(self.val)) < len(str(other)) else other
-            largest: int = self.val if len(str(self.val)) >= len(str(other)) else other
+            smallest: int = self.val if len(
+                str(self.val)) < len(str(other)) else other
+            largest: int = self.val if len(
+                str(self.val)) >= len(str(other)) else other
         for el in str(smallest)[::-1]:
             temp = "0" * len(mult)
             for k in str(largest)[::-1]:

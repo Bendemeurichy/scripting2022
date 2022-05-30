@@ -13,7 +13,8 @@ class Rooster:
             assert len(inp) > 0, "ongeldig rooster"
         lengte = len(lijst[0]) if len(lijst[0]) > 0 else -1
         assert all(len(el) == lengte for el in lijst) and \
-               all(isinstance(item, int) for sublist in lijst for item in sublist), "ongeldig rooster"
+            all(isinstance(item, int)
+                for sublist in lijst for item in sublist), "ongeldig rooster"
         self.rooster = lijst
 
     def grootste(self):
@@ -34,8 +35,8 @@ class Rooster:
 
     def __str__(self):
         return "\n".join([" ".join([
-                                       f"{str(i): >{len(str(self.grootste())) if len(str(self.grootste())) > len(str(self.kleinste())) else len(str(self.kleinste()))}}"
-                                       for i in el]) for el in self.rooster])
+            f"{str(i): >{len(str(self.grootste())) if len(str(self.grootste())) > len(str(self.kleinste())) else len(str(self.kleinste()))}}"
+            for i in el]) for el in self.rooster])
 
     def gesorteerd(self, dalend=False, kolommen=False):
         if kolommen:
@@ -81,7 +82,8 @@ class Rooster:
         return self
 
     def __add__(self, other):
-        assert len(self.rooster) == len(other.rooster), "aantal rijen is verschillend"
+        assert len(self.rooster) == len(
+            other.rooster), "aantal rijen is verschillend"
         roost = []
         for i, el in enumerate(self.rooster):
             temp = el[:]
@@ -90,7 +92,8 @@ class Rooster:
         return Rooster(roost)
 
     def __sub__(self, other):
-        assert len(self.rooster[0]) == len(other.rooster[0]), "aantal kolommen is verschillend"
+        assert len(self.rooster[0]) == len(
+            other.rooster[0]), "aantal kolommen is verschillend"
         roost = self.rooster[:]
         roost.extend(other.rooster)
         return Rooster(roost)

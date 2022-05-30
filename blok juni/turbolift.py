@@ -35,7 +35,7 @@ class TurboLift:
         plaats = 0
         while plaats < (len(self.platforms)-1) and tijd < 1000:
             tijd += 1
-            self.platforms=[el.volgende() for el in self.platforms]
+            self.platforms = [el.volgende() for el in self.platforms]
             if int(self.platforms[plaats].stand) == int(self.platforms[plaats + 1].stand):
                 plaats += 1
         if tijd == 1000:
