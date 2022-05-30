@@ -4,7 +4,8 @@ import functools
 
 class Maan:
     def __init__(self, val):
-        assert isinstance(val, (int, float)) and val >= 0, "ongeldige waarde"
+        if not (isinstance(val, (int, float)) and val >= 0):
+            raise AssertionError("ongeldige waarde")
         self.val = int(val)
 
     def __int__(self):

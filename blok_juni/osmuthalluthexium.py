@@ -9,7 +9,8 @@ class NaamGenerator:
         self.namen = set()
 
     def naam_toevoegen(self, naam):
-        assert naam.capitalize() == naam and len(naam) > 2, "ongeldige naam"
+        if not (naam.capitalize() == naam and len(naam) > 2):
+            raise AssertionError("ongeldige naam")
         self.namen.add(naam)
         self.prefixen.add(naam[0:3])
         for i in range(1, len(naam) - 1):
