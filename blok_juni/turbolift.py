@@ -9,7 +9,8 @@ class Platform:
         self.laagste: int = laagste if laagste is not None else stand
         self.hoogste: int = hoogste if hoogste is not None else stand
         self.stand: int = stand
-        assert self.hoogste >= self.laagste and self.laagste <= self.stand <= self.hoogste, "ongeldige configuratie"
+        if not (self.hoogste >= self.laagste and self.laagste <= self.stand <= self.hoogste):
+            raise AssertionError("ongeldige configuratie")
         self.richting: int = richting
 
     def volgende(self):
