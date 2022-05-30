@@ -13,8 +13,8 @@ class Rooster:
             if len(inp) <= 0:
                 raise AssertionError("ongeldig rooster")
         lengte = len(lijst[0]) if len(lijst[0]) > 0 else -1
-        if not (all(len(el) == lengte for el in lijst) and \
-            all(isinstance(item, int)
+        if not (all(len(el) == lengte for el in lijst) and
+                all(isinstance(item, int)
                 for sublist in lijst for item in sublist)):
             raise AssertionError("ongeldig rooster")
         self.veld = lijst
@@ -85,7 +85,7 @@ class Rooster:
 
     def __add__(self, other):
         if len(self.veld) != len(
-            other.veld):
+                other.veld):
             raise AssertionError("aantal rijen is verschillend")
         roost = []
         for i, el in enumerate(self.veld):
@@ -96,7 +96,7 @@ class Rooster:
 
     def __sub__(self, other):
         if len(self.veld[0]) != len(
-            other.veld[0]):
+                other.veld[0]):
             raise AssertionError("aantal kolommen is verschillend")
         roost = self.veld[:]
         roost.extend(other.veld)
