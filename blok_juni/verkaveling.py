@@ -19,7 +19,8 @@ class Verkaveling:
                     self.veld[brij + i][bkol + k] = "-"
                 else:
                     self.veld = cp
-                    raise AssertionError("perceel kan niet gereserveerd worden")
+                    raise AssertionError(
+                        "perceel kan niet gereserveerd worden")
 
     def grootstePerceel(self):
         maxarea = 0
