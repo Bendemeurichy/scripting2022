@@ -34,14 +34,14 @@ class Rooster:
 
     def __str__(self):
         return "\n".join([" ".join([
-                                       f"{str(i): >{len(str(self.grootste())) if len(str(self.grootste())) > len(str(self.kleinste())) else len(str(self.kleinste()))}}"
-                                       for i in el]) for el in self.rooster])
+            f"{str(i): >{len(str(self.grootste())) if len(str(self.grootste())) > len(str(self.kleinste())) else len(str(self.kleinste()))}}"
+            for i in el]) for el in self.rooster])
 
     def gesorteerd(self, dalend=False, kolommen=False):
         if kolommen:
-            for i in range(len(self.rooster[0])):
+            for i, _ in enumerate(self.rooster[0]):
                 kolom = []
-                for el in range(len(self.rooster)):
+                for el, _ in enumerate(self.rooster):
                     kolom.append(self.rooster[el][i])
                 verg = kolom[:]
                 verg.sort(reverse=dalend)
@@ -58,9 +58,9 @@ class Rooster:
     def sorteer(self, dalend=False, kolommen=False):
         raster = []
         if kolommen:
-            for i in range(len(self.rooster[0])):
+            for i, _ in enumerate(self.rooster[0]):
                 kolom = []
-                for el in range(len(self.rooster)):
+                for el, _ in enumerate(self.rooster):
                     kolom.append(self.rooster[el][i])
                 raster.append(kolom)
         else:
@@ -71,9 +71,9 @@ class Rooster:
 
         if kolommen:
             temp = []
-            for i in range(len(raster[0])):
+            for i, _ in enumerate(raster[0]):
                 kolom = []
-                for el in range(len(raster)):
+                for el, _ in enumerate(raster):
                     kolom.append(raster[el][i])
                 temp.append(kolom)
             raster = temp
