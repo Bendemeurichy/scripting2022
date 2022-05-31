@@ -28,7 +28,7 @@ class Bijbel:
                 elif re.match(r"^.+$", line):
                     self.bundle[book][ch][vnr].append(line.strip())
 
-    def citaat(self, place):
+    def citaat(self, place) -> str:
         res = []
         tot = place.split(":")
         ch = re.sub(r"^.* (\d*)$", r"\1", tot[0])

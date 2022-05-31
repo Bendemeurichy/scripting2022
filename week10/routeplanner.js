@@ -54,8 +54,8 @@ class Puzzel{
         const [r, k] = this.positie;
         const [dx, dy] = richtingen[richting];
         let newPos = [r + dx, k + dy];
-        let p_ = this.bord[newPos[0]]?.[newPos[1]];
-        assert(p_ && (p_ === "." || p_ === "#"), "ongeldige richting");
+        let cpos = this.bord[newPos[0]]?.[newPos[1]];
+        assert(cpos && (cpos === "." || cpos === "#"), "ongeldige richting");
         assert(this.isBinnen(newPos), "ongeldige richting");
         assert(this.rijpass[newPos[0]] > 0 && this.kolompass[newPos[1]] > 0, "ongeldige richting");
         this.rijpass[newPos[0]]--;
