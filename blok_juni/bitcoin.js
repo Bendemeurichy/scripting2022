@@ -2,18 +2,18 @@
 
 function winst(val,proc){
    const error={name:"AssertionError",message:"ongeldige acties"}
-    proc=proc.split('');
+    let procArr=proc.split('');
     let res=0;
     let owned=0;
-    for(let i in proc){
-        if(proc[i]==="K"){
+    for(let i in procArr){
+        if(procArr[i]==="K"){
          owned++;
          if(owned!==1){
              throw error;
          }
          res-=val[i];
         }
-        else if(proc[i]==="V"){
+        else if(procArr[i]==="V"){
             res+=val[i]
             owned--;
             if(owned!==0){
