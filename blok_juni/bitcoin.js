@@ -1,5 +1,6 @@
 //https://dodona.ugent.be/nl/courses/27/series/463/activities/15429256/#
 
+
 function winst(val,proc){
    const error={name:"AssertionError",message:"ongeldige acties"}
     let procArr=proc.split('');
