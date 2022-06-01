@@ -44,11 +44,7 @@ class Rooster{
                 temp.push([el[0],el[1]-1]);
             }
         }
-        return res.sort(function(a,b){
-            if (a[0] !== b[0])
-                return (a[0] - b[0]);
-            return a[1] - b[1];
-        })
+        return res.sort((a,b)=> (a[0] !== b[0])? (a[0] - b[0]):a[1] - b[1])
     }
 
     is_opgelost(){

@@ -1,96 +1,95 @@
-//https://dodona.ugent.be/nl/courses/264/series/2691/activities/1672890574/#
+// https://dodona.ugent.be/nl/courses/264/series/2691/activities/1672890574/#
 
-function hoofdletters(str){
-    return str.toUpperCase();
+function hoofdletters (str) {
+  return str.toUpperCase()
 }
 
-function verwijderWitruimte(str){
-    return str.replaceAll(/\s/g,"");
+function verwijderWitruimte (str) {
+  return str.replaceAll(/\s/g, '')
 }
 
+class Tekst {
+  constructor (tekst) {
+    this.tekst = tekst
+  }
 
-class Tekst{
-    constructor(tekst) {
-        this.tekst=tekst;
+  fragmenten (k, ...filters) {
+    let verdeling = this.tekst
+    for (const el of filters) {
+      verdeling = el(verdeling)
     }
-
-    fragmenten(k,...filters){
-        let verdeling =this.tekst;
-        for(let el of filters){
-            verdeling=el(verdeling);
-        }
-        let res=[];
-        for(let i=0;i<verdeling.length-k+1;i++){
-            res.push(verdeling.slice(i,i+k));
-        }
-        return res;
+    const res = []
+    for (let i = 0; i < verdeling.length - k + 1; i++) {
+      res.push(verdeling.slice(i, i + k))
     }
+    return res
+  }
 }
 
-class Multiset{
-    constructor(elements) {
-        if(! Array.isArray(elements)){
-            this.freqMap=elements;
+class Multiset {
+  constructor (elements) {
+    if (!Array.isArray(elements)) {
+      this.freqMap = elements
+    } else {
+      this.freqMap = {}
+      for (const el of elements) {
+        if (el in this.freqMap) {
+          this.freqMap[el]++
         } else {
-            this.freqMap={};
-            for(let el of elements){
-                if(el in this.freqMap){
-                    this.freqMap[el]++;
-                } else{
-                    this.freqMap[el]=1
-                }
-            }
+          this.freqMap[el] = 1
         }
+      }
     }
+  }
 
-    toObject(){
-        return this.freqMap;
+  toObject () {
+    return this.freqMap
+  }
+
+  kardinaliteit () {
+    if (Object.entries(this.freqMap).length === 0) {
+      return 0
     }
+    return Object.values(this.freqMap).reduce((a, b) => a + b)
+  }
 
-    kardinaliteit(){
-        if(Object.entries(this.freqMap).length===0){
-            return 0
+  doorsnede (mset) {
+    const zset = {}
+    for (const el in mset.freqMap) {
+      if (el in this.freqMap) {
+        zset[el] = Math.min(this.freqMap[el], mset.freqMap[el])
+      }
+    }
+    return new Multiset(zset)
+  }
+
+  unie (mset) {
+    const zset = { ...this.freqMap }
+    for (const el in mset.freqMap) {
+      if (el in zset) {
+        if (mset.freqMap[el] > zset[el]) {
+          zset[el] = mset.freqMap[el]
         }
-        return Object.values(this.freqMap).reduce((a,b)=>a+b);
+      } else {
+        zset[el] = mset.freqMap[el]
+      }
     }
-
-    doorsnede(mset){
-        let zset={};
-        for(let el in mset.freqMap){
-            if(el in this.freqMap){
-                zset[el]=Math.min(this.freqMap[el],mset.freqMap[el]);
-            }
-        }
-        return new Multiset(zset);
-    }
-
-    unie(mset){
-        let zset={...this.freqMap};
-        for(let el in mset.freqMap){
-            if(el in zset){
-                if(mset.freqMap[el]>zset[el]){
-                    zset[el]=mset.freqMap[el];
-                }
-            } else {
-                zset[el]=mset.freqMap[el];
-            }
-        }
-        return new Multiset(zset);
-    }
+    return new Multiset(zset)
+  }
 }
 
-function jaccard(mset1,mset2){
-    return mset1.doorsnede(mset2).kardinaliteit()/mset1.unie(mset2).kardinaliteit()
+function jaccard (mset1, mset2) {
+  return mset1.doorsnede(mset2).kardinaliteit() / mset1.unie(mset2).kardinaliteit()
 }
 
-function dice(mset1,mset2){
-    return (2 * mset1.doorsnede(mset2).kardinaliteit()) / (mset1.kardinaliteit() + mset2.kardinaliteit());
+function dice (mset1, mset2) {
+  return (2 * mset1.doorsnede(mset2).kardinaliteit()) / (mset1.kardinaliteit() + mset2.kardinaliteit())
 }
 
-function similariteit(maat,text1,text2,k) {
-    let ctext1=new Tekst(text1);
-    ctext1=new Multiset(ctext1.fragmenten(k,verwijderWitruimte,hoofdletters));
-    let ctext2=new Tekst(text2);
-    ctext2=new Multiset(ctext2.fragmenten(k,verwijderWitruimte,hoofdletters));
-    return maat(ctext1,ctext2);
+function similariteit (maat, text1, text2, k) {
+  let ctext1 = new Tekst(text1)
+  ctext1 = new Multiset(ctext1.fragmenten(k, verwijderWitruimte, hoofdletters))
+  let ctext2 = new Tekst(text2)
+  ctext2 = new Multiset(ctext2.fragmenten(k, verwijderWitruimte, hoofdletters))
+  return maat(ctext1, ctext2)
 }
