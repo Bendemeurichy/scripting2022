@@ -53,7 +53,7 @@ class Rooster{
 
     zet(row,col,turn){
         for(let el of this.groep(row,col)){
-            let val=(parseInt(this.rooster[el[0]][el[1]])+(turn?1:-1));
+            let val=(parseInt(this.rooster[el[0]][el[1]],10)+(turn?1:-1));
             if(val<0){
                 val=0;
             } else if (val>9){
