@@ -60,7 +60,7 @@ class Rooster{
                 val=9;
             }
 
-            this.rooster[el[0]][el[1]]=""+val;
+            this.rooster[el[0]][el[1]]=String(val);
         }
         return this;
     }
