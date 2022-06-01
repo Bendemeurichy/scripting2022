@@ -4,7 +4,6 @@ class Zeshoek {
   constructor (q, r) {
     this._q = q
     this._r = r
-    
   };
 
   toString () {
