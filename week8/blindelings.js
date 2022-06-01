@@ -65,10 +65,6 @@ class Stapel {
   }
 
   draaiKaart (el) {
-    if (el.charAt(el.length - 1).toUpperCase() === el.charAt(el.length - 1)) {
-      return el.toLowerCase()
-    } else {
-      return el.toUpperCase()
-    }
+    return el.charAt(el.length - 1).toUpperCase() === el.charAt(el.length - 1) ? el.toLowerCase() : el.toUpperCase();
   }
 }
