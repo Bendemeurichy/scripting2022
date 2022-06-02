@@ -1,29 +1,173 @@
 // https://dodona.ugent.be/nl/courses/1151/series/12997/activities/2141798882/#
+const assert = require("assert");
 class Doolhof {
-  constructor (rijen, kolommen, hormuren, vertmurenn, uitgang, thes, min) {
-    this.rijen = rijen
-    this.kolommen = kolommen
-    this.hormuren = hormuren
-    this.vertmuren = vertmurenn
-    this.uitgang = uitgang
-    this.the = thes
-    this.min = min
-    this.richtingen = { L: -1, U: -kolommen, D: kolommen, R: 1 }
-  }
 
-  isGeldig (r, k, d) {
-    if (!(r < this.rijen && k < this.kolommen)) {
-      return false
-    } else if (!d in this.richtingen) {
-      return false
-    } else if (d === 'U' || d === 'D') {
-      if (this.vertmuren.some(el => el === ((r * this.kolommen + k) + this.richtingen[d]))) {
-        return false
-      }
+    constructor(r, k, hor, vert, uitgang, thes, mino) {
+        this.r = r;
+        this.k = k;
+        this.hor = hor;
+        this.vert = vert;
+        this.uitgang = uitgang
+        this.thes = thes
+        this.mino = mino
     }
-    const temp = ((r * this.kolommen + k) + this.richtingen[d])
-    return !this.hormuren.some(el => el === ((r * this.kolommen + k) + this.richtingen[d]))
+
+    isGeldig(r, k, d) {
+        switch (d) {
+            case "U":
+                if (r - 1 >= 0 && !this.hor.includes(this.k * r + k)) {
+                    return true
+                }
+                break;
+            case "D":
+                if (r + 1 < this.r && !this.hor.includes(this.k * (r + 1) + k)) {
+                    return true
+                }
+                break;
+            case "R":
+                if (k + 1 < this.k && !this.vert.includes(this.r * (k + 1) + r)) {
+                    return true
+                }
+                break;
+            case "L":
+                if (k - 1 >= 0 && !this.vert.includes(this.r *k + r)) {
+                    return true
+                }
+                break;
+            case "P":
+                return true
+        }
+        return false
+    }
+
+    isGewonnen(){
+        return this.thes[0] === this.uitgang[0] && this.thes[1]===this.uitgang[1];
+    }
+
+    isVerloren(){
+        return this.mino[0]===this.thes[0] && this.mino[1]===this.thes[1];
+    }
+
+    toString(){
+        let doolhof = ""
+        //startlijn maken
+        let startlijn = ""
+        for(let i=0 ; i<this.k ; i++){
+            startlijn+= "+-"
+        }
+        startlijn+= "+\n";
+        doolhof+= startlijn
+        for(let r=0 ; r<this.r ; r++){
+            let horLijn = "";
+            let vertLijn = "|";
+            for(let k=0 ; k<this.k ; k++){
+                //2x
+                let horCode = this.k * (r+1) + k;
+                let vertCode = this.r *k + (r);
+                if(this.hor.includes(horCode)){
+                    horLijn+= "+-";
+                }
+                else{
+                    horLijn+= "+ ";
+                }
+                if(this.vert.includes(vertCode)){
+                    vertLijn+="| ";
+                }
+                else{
+                    if(k===0){
+                        vertLijn+= " "
+                    }
+                    else {
+                        vertLijn += "  ";
+                    }
+                }
+            }
+            if(this.hor.includes((r+1)*this.k + this.k-1)){
+                horLijn= horLijn.substring(0,horLijn.length-1) + "-+"
+            }
+            else{
+                horLijn= horLijn.substring(0,horLijn.length-1) + " +"
+            }
+            doolhof+= vertLijn + "|\n" + horLijn + "\n";
+        }
+        doolhof = this.plaatsCharInDoolhof(doolhof, this.uitgang, "S")
+        doolhof = this.plaatsCharInDoolhof(doolhof, this.thes, "T")
+        doolhof = this.plaatsCharInDoolhof(doolhof, this.mino, "M")
+        return doolhof.substring(0,doolhof.length - ((this.k+1) * 2)) + startlijn.substring(0,startlijn.length-1)
+    }
+
+    plaatsCharInDoolhof(doolhof, pos, char){
+        let index =  (pos[0]+1*pos[0]+1)*2*(this.k+1)+1 + pos[1]*2
+
+        return this.replaceAt(doolhof, index, char)
+    }
+
+    replaceAt(string, index, replacement){
+        return string.substring(0, index) + replacement + string.substring(index + replacement.length);
+    }
+
+    verzetTheseus(richting){
+        assert(this.isGeldig(this.thes[0], this.thes[1], richting), "ongeldige zet");
+        switch(richting){
+            case "U":
+                this.thes[0] -= 1;
+                break;
+            case "D":
+                this.thes = [this.thes[0]+1, this.thes[1]]
+                break;
+            case "R":
+                this.thes = [this.thes[0], this.thes[1]+1]
+                break;
+            case "L":
+                this.thes[1] -= 1;
+                break;
+            case "P":
+                break;
+        }
+    }
+
+    verzet(volgorde){
+        let res=""
+      for(let el of volgorde.split("")){
+        this.verzetTheseus(el);
+        if(this.isGewonnen()){
+            return res
+        }
+        for(let _=0;_<2;_++) {
+          if (!this.isGewonnen() && !this.isVerloren()) {
+            res+=this.verzetMinotaurus();
+          }
+        }
+      }
+      return res
+    }
+
+  verzetMinotaurus() {
+        const dist=Math.abs(this.thes[0]-this.mino[0])+Math.abs(this.thes[1]-this.mino[1]);
+        if(this.isGeldig(this.mino[0],this.mino[1],"L")){
+            if(Math.abs(this.thes[0]-this.mino[0])+Math.abs(this.thes[1]-(this.mino[1]-1))<dist){
+                this.mino[1]--;
+                return "L";
+            }
+        }
+        if(this.isGeldig(this.mino[0],this.mino[1],"R")){
+            if(Math.abs(this.thes[0]-this.mino[0])+Math.abs(this.thes[1]-(this.mino[1]+1))<dist){
+                this.mino[1]++;
+                return "R";
+            }
+        }
+        if(this.isGeldig(this.mino[0],this.mino[1],"D")){
+            if(Math.abs(this.thes[0]-(this.mino[0]+1))+Math.abs(this.thes[1]-this.mino[1])<dist){
+                this.mino[0]++;
+                return "D";
+            }
+        }
+        if(this.isGeldig(this.mino[0],this.mino[1],"U")){
+            if(Math.abs(this.thes[0]-(this.mino[0]-1))+Math.abs(this.thes[1]-this.mino[1])<dist){
+                this.mino[0]--;
+                return "U";
+            }
+        }
+        return "P";
   }
 }
-const doolhof01 = new Doolhof(6, 6, [6, 13, 16, 20, 22, 26], [8, 9, 10, 13, 14, 16, 20, 25, 27, 30, 31], [0, 4], [2, 4], [0, 0])
-doolhof01.isGeldig(1, 3, 'R')

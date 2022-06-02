@@ -1,84 +1,100 @@
 // https://dodona.ugent.be/nl/courses/1151/series/12997/activities/1569264620/#
 
-class Centrifuge {
-  constructor (n, config) {
-    this.n = n
-    this.config = config
-  }
-
-  toString () {
-    return `Centrifuge(${this.n}, [${this.config.sort(function (a, b) { return a - b }).join(', ')}])`
-  }
-
-  roteer (wijzerzin) {
-    let factor = 1
-    if (wijzerzin) {
-      factor = -1
+const assert = require("assert");
+class Centrifuge{
+    n = 0;
+    config = [];
+    constructor(n, config) {
+        this.n = n;
+        this.config = config;
     }
 
-    for (let i = 0; i < this.config.length; i++) {
-      this.config[i] = (this.config[i] + factor + this.n) % (this.n)
+    toString(){
+        let configString = "";
+        this.config.sort(function (a, b) {  return a - b;  }).forEach((x) => configString += x + ", ");
+        configString = configString.substring(0, configString.length-2);
+        return "Centrifuge(" + this.n + ", [" + configString + "])";
     }
-    return this
-  }
 
-  spiegel () {
-    for (let i = 0; i < this.config.length; i++) {
-      this.config[i] = (this.n - this.config[i]) % this.n
-    }
-    return this
-  }
+    roteer(wijzerin=false){
+        if(wijzerin){
+            wijzerin = -1;
+        }
+        else{
+            wijzerin = 1;
+        }
+        for(let i=0 ; i<this.config.length ; i++){
+            let current = this.config[i];
+            let nieuw = current + wijzerin;
+            if(nieuw < 0){
+                nieuw+= this.n;
+            }
+            else if(nieuw >= this.n){
+                nieuw-= this.n;
+            }
+            this.config[i] = nieuw;
+        }
+        return this;
 
-  isGelijk (d) {
-    const temp = [...this.config]
-    if (this.n !== d.n) {
-      return false
     }
-    let i = 0
-    let found = false
-    while (i < this.n && !found) {
-      let res = true
-      let j = 0
-      while (j < this.config.length && res) {
-        const a = this.config.sort(function (a, b) { return a - b })[j]
-        const c = d.config.sort(function (a, b) { return a - b })[j]
-        res = a === c
-        j++
-      }
-      this.roteer()
-      found = res
-      i++
-    }
-    this.config = temp
-    return found
-  }
 
-  vul (d) {
-    if (this.n !== d.n) {
-      throw { name: 'AssertionError', message: 'gaten kunnen niet gevuld worden' }
+    spiegel(){
+        for(let i=0 ; i<this.config.length ; i++){
+            if(this.config[i] !== 0 && this.config[i] !== this.n /2) {
+                this.config[i] = this.n - this.config[i];
+            }
+        }
+        return this;
     }
-    for (const el of d.config) {
-      if (this.config.some(a => a === el)) {
-        throw { name: 'AssertionError', message: 'gaten kunnen niet gevuld worden' }
-      }
-      this.config.push(el)
-    }
-    return this
-  }
 
-  leeg (d) {
-    const temp = [...d.config]
-    if (this.n !== d.n) {
-      throw { name: 'AssertionError', message: 'gaten kunnen niet geleegd worden' }
+     isGelijk(cent2){
+        let cent1 = new Centrifuge(this.n+0, this.config.slice(0,))
+        cent2 = new Centrifuge(cent2.n, cent2.config)
+        if(cent1.n === cent2.n) {
+            for (let k = 0; k < 2; k++) {
+                for (let i = 0; i < cent1.n; i++) {
+                    if (cent1.config.sort().toString() === cent2.config.sort().toString()) {
+                        cent1 = this;
+                        return true;
+                    }
+                    cent1 = cent1.roteer()
+                }
+                cent1 = cent1.spiegel();
+            }
+        }
+        return false
     }
-    for (let i = temp.length - 1; i >= 0; i--) {
-      if (!this.config.some(a => a === d.config[i])) {
-        throw { name: 'AssertionError', message: 'gaten kunnen niet geleegd worden' }
-      }
-      this.config.sort(function (a, b) { return a - b }).splice(d.config.sort(function (a, b) { return a - b })[i], 1)
-      d.config.sort(function (a, b) { return a - b }).splice(d.config.sort(function (a, b) { return a - b })[i], 1)
+
+    vul(cent2){
+        let cent1 = this;
+        assert(cent1.n === cent2.n, "gaten kunnen niet gevuld worden");
+        let gevuld = cent2.config.slice(0,);
+        for(let i=0 ; i<cent1.config.length ; i++){
+            if(gevuld.includes(cent1.config[i])){
+                throw {name:"AssertionError", message: "gaten kunnen niet gevuld worden"};
+            }
+            else{
+                gevuld.push(cent1.config[i])
+            }
+        }
+        this.config = gevuld
+        return this;
     }
-    d.config = temp
-    return this
-  }
+
+        leeg(cent2){
+        let cent1 = this;
+        assert(cent1.n === cent2.n, "gaten kunnen niet geleegd worden");
+        let gevuld = cent1.config.slice(0,);
+        for(let i=0 ; i<cent2.config.length ; i++){
+            if(!gevuld.includes(cent2.config[i])){
+                throw {name:"AssertionError", message: "gaten kunnen niet geleegd worden"};
+            }
+            else{
+                gevuld.splice(gevuld.indexOf(cent2.config[i]),1);
+            }
+        }
+        this.config = gevuld
+        return this;
+    }
+
 }
