@@ -63,14 +63,14 @@ class Doolhof {
         // 2x
         const horCode = this.k * (r + 1) + k
         const vertCode = this.r * k + (r)
-        horLijn += this.hor.includes(horCode) ? '+-' : '+ ';
+        horLijn += this.hor.includes(horCode) ? '+-' : '+ '
         if (this.vert.includes(vertCode)) {
           vertLijn += '| '
         } else {
-          vertLijn += k === 0 ? ' ' : '  ';
+          vertLijn += k === 0 ? ' ' : '  '
         }
       }
-      horLijn = this.hor.includes((r + 1) * this.k + this.k - 1) ? horLijn.substring(0, horLijn.length - 1) + '-+' : horLijn.substring(0, horLijn.length - 1) + ' +';
+      horLijn = this.hor.includes((r + 1) * this.k + this.k - 1) ? horLijn.substring(0, horLijn.length - 1) + '-+' : horLijn.substring(0, horLijn.length - 1) + ' +'
       doolhof += vertLijn + '|\n' + horLijn + '\n'
     }
     doolhof = this.plaatsCharInDoolhof(doolhof, this.uitgang, 'S')
