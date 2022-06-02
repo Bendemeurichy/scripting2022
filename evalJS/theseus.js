@@ -63,26 +63,14 @@ class Doolhof {
         // 2x
         const horCode = this.k * (r + 1) + k
         const vertCode = this.r * k + (r)
-        if (this.hor.includes(horCode)) {
-          horLijn += '+-'
-        } else {
-          horLijn += '+ '
-        }
+        horLijn += this.hor.includes(horCode) ? '+-' : '+ ';
         if (this.vert.includes(vertCode)) {
           vertLijn += '| '
         } else {
-          if (k === 0) {
-            vertLijn += ' '
-          } else {
-            vertLijn += '  '
-          }
+          vertLijn += k === 0 ? ' ' : '  ';
         }
       }
-      if (this.hor.includes((r + 1) * this.k + this.k - 1)) {
-        horLijn = horLijn.substring(0, horLijn.length - 1) + '-+'
-      } else {
-        horLijn = horLijn.substring(0, horLijn.length - 1) + ' +'
-      }
+      horLijn = this.hor.includes((r + 1) * this.k + this.k - 1) ? horLijn.substring(0, horLijn.length - 1) + '-+' : horLijn.substring(0, horLijn.length - 1) + ' +';
       doolhof += vertLijn + '|\n' + horLijn + '\n'
     }
     doolhof = this.plaatsCharInDoolhof(doolhof, this.uitgang, 'S')
@@ -92,7 +80,7 @@ class Doolhof {
   }
 
   plaatsCharInDoolhof (doolhof, pos, char) {
-    const index = (pos[0] + 1 * pos[0] + 1) * 2 * (this.k + 1) + 1 + pos[1] * 2
+    const index = (pos[0] + Number(pos[0]) + 1) * 2 * (this.k + 1) + 1 + pos[1] * 2
 
     return this.replaceAt(doolhof, index, char)
   }
