@@ -49,7 +49,7 @@ class Panini:
         return ", ".join(list)
 
     def __add__(self, other):
-        nls = [el for el in self.col]
+        nls = list(self.col)
         nls.extend(other.col)
         return Panini(nls)
 
